@@ -1,0 +1,15 @@
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/ament_index/resource_index/package_run_dependencies/alfred_sim
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/ament_index/resource_index/parent_prefix_path/alfred_sim
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/environment/ament_prefix_path.sh
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/environment/ament_prefix_path.dsv
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/environment/path.sh
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/environment/path.dsv
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/local_setup.bash
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/local_setup.sh
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/local_setup.zsh
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/local_setup.dsv
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/package.dsv
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/ament_index/resource_index/packages/alfred_sim
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/cmake/alfred_simConfig.cmake
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/cmake/alfred_simConfig-version.cmake
+/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/install/alfred_sim/share/alfred_sim/package.xml
