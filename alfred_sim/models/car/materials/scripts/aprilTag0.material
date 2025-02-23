@@ -1,0 +1,14 @@
+material aprilTag0/Diffuse
+{
+    receive_shadows off
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture tag36h11-0.png
+            }
+        }
+    }
+}
