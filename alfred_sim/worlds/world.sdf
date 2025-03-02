@@ -4,10 +4,10 @@
     <!-- World Defintion -->
     <gravity>0 0 -9.8000000000000007</gravity>
     <physics type='ode'>
-      <max_step_size>0.01</max_step_size>
-      <real_time_factor>1</real_time_factor>
-      <max_contacts>10</max_contacts>
-      <real_time_update_rate>1000</real_time_update_rate>
+      <max_step_size>0.016</max_step_size>
+      <real_time_factor>0.75</real_time_factor>
+      <max_contacts>3</max_contacts>
+      <real_time_update_rate>60</real_time_update_rate>
     </physics>
     <plugin name='ignition::gazebo::systems::Physics' filename='libignition-gazebo-physics-system.so'/>
     <plugin name='ignition::gazebo::systems::UserCommands' filename='libignition-gazebo-user-commands-system.so'/>
@@ -3499,14 +3499,6 @@
         <falloff>0</falloff>
       </spot>
     </light>
-
-    <frame name="world_frame">  <!-- Define a named frame called "world_frame" -->
-      <pose 
-          relative_to="tugbot">  <!-- This frame is relative to the default world frame -->
-          <position x="0" y="0" z="0" />
-          <rotation rpy="0 0 0" />
-      </pose>
-    </frame>
 
   </world>
 </sdf>

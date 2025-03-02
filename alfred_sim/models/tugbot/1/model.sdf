@@ -133,7 +133,7 @@
                 <xyz>0 0 1</xyz>
                 <limit>
                     <effort>1000</effort>
-                    <velocity>20.0</velocity>
+                    <velocity>5.0</velocity>
                 </limit>
             </axis>
         </joint>
@@ -928,7 +928,7 @@
         </plugin>
         <plugin filename="ignition-gazebo-joint-controller-system" name="ignition::gazebo::systems::JointController">
             <joint_name>warnign_light_joint</joint_name>
-            <initial_velocity>10.0</initial_velocity>
+            <initial_velocity>5.0</initial_velocity>
         </plugin>
         <plugin filename="ignition-gazebo-linearbatteryplugin-system" name="ignition::gazebo::systems::LinearBatteryPlugin">
             <battery_name>linear_battery</battery_name>
