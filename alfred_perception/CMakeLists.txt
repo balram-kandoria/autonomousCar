@@ -11,6 +11,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(cv_bridge REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -20,20 +22,22 @@ include_directories(
   include
 )
 
+
 # Declare your executable target
-add_executable(mainPerception 
+add_executable(alfred_perception 
   src/mainPerception.cpp
   src/AprilTagDetector_class.cpp
+  src/TagPerception_class.cpp
   )
 
 # Link the executable to the required ROS2 libraries
-ament_target_dependencies(mainPerception rclcpp std_msgs)
+ament_target_dependencies(alfred_perception rclcpp std_msgs sensor_msgs cv_bridge OpenCV)
 
 
 
 # Add Executables to directory
 install(TARGETS
-  mainPerception
+  alfred_perception
   DESTINATION lib/${PROJECT_NAME})
 
 # Install header files
