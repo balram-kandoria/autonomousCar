@@ -2,14 +2,36 @@
 
 // Project Alfred Libraries
 #include "AprilTagDetector_class.h"
+#include "TagPerception_class.h"
 
 // Built-in Cpp Libraries
+#include <iostream>
+#include <iomanip>
 #include <string>
-#include <memory>
 
 // ROS2 Libraries
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.hpp"
+
+// Other Libraries
+#include "apriltag/apriltag.h"
+#include "cv_bridge/cv_bridge.hpp"
+#include <opencv2/opencv.hpp>
+
+// C Libraries
+extern "C" {
+    #include "apriltag/apriltag.h"
+    #include "apriltag/tag36h11.h"
+    #include "apriltag/tag25h9.h"
+    #include "apriltag/tag16h5.h"
+    #include "apriltag/tagCircle21h7.h"
+    #include "apriltag/tagCircle49h12.h"
+    #include "apriltag/tagCustom48h12.h"
+    #include "apriltag/tagStandard41h12.h"
+    #include "apriltag/tagStandard52h13.h"
+    #include "apriltag/common/getopt.h"
+    }
+
 
 class TagPerception
 {
@@ -31,6 +53,7 @@ class TagPerception
         AprilTagDetector& mDetector;
         std::string mRawCamTopic;
         std::string mCamName;
+        apriltag_detector_t *mtd;
         
 
         //Subscribers

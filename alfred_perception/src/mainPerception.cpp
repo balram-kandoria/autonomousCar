@@ -41,16 +41,16 @@ int main(int argc, char * argv[])
         "Front Cam"
     };
 
-    TagPerception Cam1{
-        perception_node,
-        Tag1,
-        rawBackCamTopic,
-        "Back Cam"
-    };
+    // TagPerception Cam1{
+    //     perception_node,
+    //     Tag1,
+    //     rawBackCamTopic,
+    //     "Back Cam"
+    // };
 
     
 
-    Cam1.printTopic();
+    // Cam1.printTopic();
 
     rclcpp::spin(perception_node);
     rclcpp::shutdown();
