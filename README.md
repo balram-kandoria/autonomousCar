@@ -12,3 +12,11 @@ Ensure the current working directory is in the src file of the package being tes
 '''
 g++ *.cpp -o output
 '''
+
+## Dependencies
+
+'''
+git@github.com:AprilRobotics/apriltag.git
+https://github.com/AprilRobotics/apriltag
+sudo apt-get install libapriltag-dev
+'''

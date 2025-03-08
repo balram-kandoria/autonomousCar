@@ -13,6 +13,7 @@ find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
+find_package(apriltag)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -31,8 +32,8 @@ add_executable(alfred_perception
   )
 
 # Link the executable to the required ROS2 libraries
-ament_target_dependencies(alfred_perception rclcpp std_msgs sensor_msgs cv_bridge OpenCV)
-
+ament_target_dependencies(alfred_perception rclcpp std_msgs sensor_msgs cv_bridge OpenCV apriltag)
+target_link_libraries(alfred_perception apriltag)
 
 
 # Add Executables to directory
@@ -44,6 +45,11 @@ install(TARGETS
 install(DIRECTORY include/
   DESTINATION include/
 )
+
+# Install header files
+# install(DIRECTORY include/
+#   DESTINATION include/
+# )
 
 
 if(BUILD_TESTING)
