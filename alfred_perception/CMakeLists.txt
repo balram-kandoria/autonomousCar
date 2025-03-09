@@ -21,6 +21,7 @@ find_package(apriltag)
 # Specify include directories
 include_directories(
   include
+  src/tag_utils/tag_structs
 )
 
 
@@ -29,6 +30,7 @@ add_executable(alfred_perception
   src/mainPerception.cpp
   src/AprilTagDetector_class.cpp
   src/TagPerception_class.cpp
+  src/tag_utils/tag_structs/TagDetection_struct.cpp
   )
 
 # Link the executable to the required ROS2 libraries
@@ -44,6 +46,10 @@ install(TARGETS
 # Install header files
 install(DIRECTORY include/
   DESTINATION include/
+)
+
+install(DIRECTORY src/tag_utils/tag_structs/
+  DESTINATION src/tag_utils/tag_structs/
 )
 
 # Install header files
