@@ -11,6 +11,7 @@ colcon build --symlink-install
 Ensure the current working directory is in the src file of the package being tested
 '''
 g++ *.cpp -o output
+colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 '''
 
 ## Dependencies
