@@ -18,6 +18,9 @@
 #include "cv_bridge/cv_bridge.hpp"
 #include <opencv2/opencv.hpp>
 
+// Structures
+#include "TagDetection_struct.h"
+
 // C Libraries
 extern "C" {
     #include "apriltag/apriltag.h"
@@ -54,6 +57,7 @@ class TagPerception
         std::string mRawCamTopic;
         std::string mCamName;
         apriltag_detector_t *mtd;
+        apriltag_family_t *mtf;
         
 
         //Subscribers

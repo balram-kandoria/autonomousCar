@@ -3,10 +3,6 @@ launch:
 # - include:
 #     file: "$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py world_sdf_file:=/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/worlds/world.sdf"
 
-# Launch World Simulation
-- executable: 
-    cmd: gz sim -v 1 -r /home/phd/dev/ros2_ws/autonomousCar/alfred_sim/worlds/world.sdf
-
 - node:
     pkg: "ros_gz_bridge"
     exec: parameter_bridge
@@ -17,5 +13,8 @@ launch:
         name: "config_file"
         value: "/home/phd/dev/ros2_ws/autonomousCar/alfred_bringup/config/ros_gz_bridge.yaml"
 
+# Launch World Simulation
+- executable: 
+    cmd: gz sim -v 1 -r /home/phd/dev/ros2_ws/autonomousCar/alfred_sim/worlds/world.sdf
 
 
