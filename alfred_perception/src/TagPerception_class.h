@@ -56,8 +56,7 @@ class TagPerception
         AprilTagDetector& mDetector;
         std::string mRawCamTopic;
         std::string mCamName;
-        apriltag_detector_t *mtd;
-        apriltag_family_t *mtf;
+        
         
 
         //Subscribers

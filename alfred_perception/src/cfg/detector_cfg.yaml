@@ -1,17 +1,18 @@
-- tag_size: 120
-- tag_family: "t36h11"
-- camera:
-  - front_cam:
-    - height: 480
-    - width: 848
-    - distortion_model: plumb_bob
-    - d:
+tag_size: 120
+tag_family: "tag36h11"
+camera:
+  front_cam:
+    height: 480
+    width: 848
+    raw_cam_topic: "/vehicle/sensor/front_cam/camera_image"
+    distortion_model: plumb_bob
+    d:
       - 0.0
       - 0.0
       - 0.0
       - 0.0
       - 0.0
-    - k:
+    k:
       - 616.9238090515137
       - 0.0
       - 424.0
@@ -21,7 +22,7 @@
       - 0.0
       - 0.0
       - 1.0
-    - r:
+    r:
       - 1.0
       - 0.0
       - 0.0
@@ -31,58 +32,7 @@
       - 0.0
       - 0.0
       - 1.0
-    - p:
-      - 616.9238090515137
-      - 0.0
-      - 424.0
-      - 0.0
-      - 0.0
-      - 616.9238662719727
-      - 240.0
-      - 0.0
-      - 0.0
-      - 0.0
-      - 1.0
-      - 0.0
-    - binning_x: 0
-    - binning_y: 0
-    - roi:
-      - x_offset: 0
-      - y_offset: 0
-      - height: 0
-      - width: 0
-      - do_rectify: false
-  - back_cam:
-    - height: 480
-    - width: 848
-    - distortion_model: plumb_bob
-    - d:
-      - 0.0
-      - 0.0
-      - 0.0
-      - 0.0
-      - 0.0
-    - k:
-      - 616.9238090515137
-      - 0.0
-      - 424.0
-      - 0.0
-      - 616.9238662719727
-      - 240.0
-      - 0.0
-      - 0.0
-      - 1.0
-    - r:
-      - 1.0
-      - 0.0
-      - 0.0
-      - 0.0
-      - 1.0
-      - 0.0
-      - 0.0
-      - 0.0
-      - 1.0
-    - p:
+    p:
       - 616.9238090515137
       - 0.0
       - 424.0
@@ -95,11 +45,63 @@
       - 0.0
       - 1.0
       - 0.0
-    - binning_x: 0
-    - binning_y: 0
-    - roi:
-      - x_offset: 0
-      - y_offset: 0
-      - height: 0
-      - width: 0
-      - do_rectify: false
+    binning_x: 0
+    binning_y: 0
+    roi:
+      x_offset: 0
+      y_offset: 0
+      height: 0
+      width: 0
+      do_rectify: false
+  back_cam:
+    height: 480
+    width: 848
+    raw_cam_topic: "/vehicle/sensor/back_cam/camera_image"
+    distortion_model: plumb_bob
+    d:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    k:
+      - 616.9238090515137
+      - 0.0
+      - 424.0
+      - 0.0
+      - 616.9238662719727
+      - 240.0
+      - 0.0
+      - 0.0
+      - 1.0
+    r:
+      - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+    p:
+      - 616.9238090515137
+      - 0.0
+      - 424.0
+      - 0.0
+      - 0.0
+      - 616.9238662719727
+      - 240.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    binning_x: 0
+    binning_y: 0
+    roi:
+      x_offset: 0
+      y_offset: 0
+      height: 0
+      width: 0
+      do_rectify: false

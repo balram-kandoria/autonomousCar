@@ -16,6 +16,7 @@
 #include "apriltag/apriltag.h"
 #include "cv_bridge/cv_bridge.hpp"
 #include <opencv2/opencv.hpp>
+#include "yaml-cpp/yaml.h"
 
 // Structures
 #include "TagDetection_struct.h"
@@ -54,10 +55,7 @@ TagPerception::TagPerception(
         std::bind(&TagPerception::imageCallback, this, std::placeholders::_1)
     );
 
-    mtf = tag36h11_create();
-
-    mtd = apriltag_detector_create();
-    apriltag_detector_add_family(mtd, mtf);
+    std::cout << "Initializing Perception for [" << mCamName << "]\n";
 
    
 }
@@ -69,10 +67,10 @@ void TagPerception::printTopic()
 
 void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 {
-    // std::cout << "Received an image frame!\n" << std::endl;
-    // std::cout << "Message: " << msg << std::endl;
 
     cv::Mat image = cv_bridge::toCvCopy(msg,"bgr8")->image;
+
+    mDetector.detectTag(image);
 
     // cv::imshow(mCamName, image);  
     // int k = cv::waitKey(1); // Wait for a keystroke in the window
@@ -85,39 +83,7 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
     // apriltag_detector_t *mtd = apriltag_detector_create();
     // apriltag_detector_add_family(mtd, tf);
 
-    // Create Empty Mat items to store manipulated images
-    cv::Mat frame, gray;
-
-    // Create a copy of image to frame for visualizing detections
-    frame = image;
-
-    // Add gray version of frame into variable gray
-    cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
-
-    // Show gray image
-    cv::imshow(mCamName, gray);  
-    cv::waitKey(1); 
-
-     // Make an image_u8_t header for the Mat data
-    image_u8_t im = {gray.cols, gray.rows, gray.cols, gray.data};
-
-    zarray_t *detections = apriltag_detector_detect(mtd, &im);
-
     
-
-    for (int i = 0; i < zarray_size(detections); i++) {
-
-        // Get Detection information into a readable form
-        apriltag_detection_t *det;
-        zarray_get(detections, i, &det);
-
-        // Populate a Structure with Dectection Information
-        TagDetection_struct Detection(det);
-
-        // Print Detection Information to the Terminal
-        Detection.display();
-
-        std::vector<std::vector<float>> cornerPoints(4, std::vector<float>(2, 0));
 
         
         // cv::line(frame, cv::Point(det->p[0][0], det->p[0][1]),
@@ -147,13 +113,9 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
         //         fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
         
         
-        };
-
-        apriltag_detections_destroy(detections);
-
-        imshow("Tag Detections", frame);
         
 
-        
+
+             
 
 }

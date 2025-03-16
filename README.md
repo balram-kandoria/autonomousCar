@@ -21,3 +21,7 @@ git@github.com:AprilRobotics/apriltag.git
 https://github.com/AprilRobotics/apriltag
 sudo apt-get install libapriltag-dev
 '''
+
+'''
+sudo apt-get install libyaml-cpp-dev
+'''
