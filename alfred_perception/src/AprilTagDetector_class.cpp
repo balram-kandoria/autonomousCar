@@ -32,6 +32,8 @@ extern "C" {
     #include "apriltag/common/getopt.h"
     }
 
+using VariantType = std::variant<int, float, std::vector<std::vector<float>>, std::vector<float>>;
+
 AprilTagDetector::AprilTagDetector(
     std::string TagFamily, 
     double TagSize,
@@ -57,7 +59,7 @@ void AprilTagDetector::printFamily()
     std::cout << "April Tag Family: " << mTagFamily << "\n";
 }
 
-void AprilTagDetector::detectTag(const cv::Mat &image)
+std::unordered_map<std::string, VariantType> AprilTagDetector::detectTag(const cv::Mat &image)
 {
     std::cout << "Running Tag Detector" << "\n";
 
@@ -77,20 +79,32 @@ void AprilTagDetector::detectTag(const cv::Mat &image)
     // Make an image_u8_t header for the Mat data
     image_u8_t im = {gray.cols, gray.rows, gray.cols, gray.data};
 
+    std::cout << "1\n";
     // Perform Detection of April Tags
-    zarray_t *detections = apriltag_detector_detect(mtd, &im);    
+    zarray_t *detections = apriltag_detector_detect(mtd, &im); 
+    std::cout << "2\n";   
+
+    std::unordered_map<std::string, VariantType>  Detection;
+
+    std::cout << "3\n"; 
 
     for (int i = 0; i < zarray_size(detections); i++) {
         
+        std::cout << "4\n"; 
         // Get Detection information into a readable form
         apriltag_detection_t *det;
         zarray_get(detections, i, &det);
+        std::cout << "5\n"; 
 
         // Populate a Structure with Dectection Information
-        TagDetection_struct Detection(det);
+        TagDetection_struct Detection_object(det);
+
+        std::cout << "6\n"; 
 
         // Print Detection Information to the Terminal
-        Detection.display();
+        // Detection_object.display();
+
+        Detection = Detection_object.returnDetection();
 
         std::vector<std::vector<float>> cornerPoints(4, std::vector<float>(2, 0));
     };
@@ -100,4 +114,8 @@ void AprilTagDetector::detectTag(const cv::Mat &image)
 
     // Show Tag Image with Detection Overlay
     imshow(mCamName + " Tag Detections", frame);
+
+    std::cout << "End detect callback\n";
+
+    return Detection;
 }
