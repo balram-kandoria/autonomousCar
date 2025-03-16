@@ -1,8 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <variant>
+#include <unordered_map>
 
 #include "TagDetection_struct.h"
+
+using VariantType = std::variant<int, float, std::vector<std::vector<float>>, std::vector<float>>;
 
 void TagDetection_struct::display() const {
 
@@ -25,4 +29,17 @@ void TagDetection_struct::display() const {
     }
     std::cout << "\t}\n";
 
+}
+
+std::unordered_map<std::string, VariantType> TagDetection_struct::returnDetection() {
+    
+    std::unordered_map<std::string, VariantType> Detection;
+
+    Detection["id"] = id;
+    Detection["hamming"] = hamming;
+    Detection["decision_margin"] = decision_margin;
+    Detection["centerPoints"] = centerPoints;
+    Detection["cornerPoints"] = cornerPoints;
+
+    return Detection;
 }
