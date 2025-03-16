@@ -46,11 +46,11 @@ class AprilTagDetector
         std::unordered_map<std::string, VariantType> detectTag(const cv::Mat &image);
 
     private:
-        std::string mTagFamily;
-        double mTagSize;
-        std::string mCamName;
-        apriltag_detector_t *mtd;
-        apriltag_family_t *mtf;
+        std::string _TagFamily;
+        double _TagSize;
+        std::string _CamName;
+        apriltag_detector_t *_td;
+        apriltag_family_t *_tf;
         
         
 };

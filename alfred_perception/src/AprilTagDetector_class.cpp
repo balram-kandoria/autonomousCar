@@ -38,25 +38,25 @@ AprilTagDetector::AprilTagDetector(
     std::string TagFamily, 
     double TagSize,
     std::string camName):
-    mCamName(std::move(camName)) 
+    _CamName(std::move(camName)) 
 {
-    mTagFamily = TagFamily;
-    mTagSize = TagSize;
+    _TagFamily = TagFamily;
+    _TagSize = TagSize;
 
     // Initialize and Set Tag Family
-    apriltag_family_t *mtf = NULL;
-    if (mTagFamily == "tag36h11") {
-        mtf = tag36h11_create();
+    apriltag_family_t *_tf = NULL;
+    if (_TagFamily == "tag36h11") {
+        _tf = tag36h11_create();
     };
     
     // Create Detector
-    mtd = apriltag_detector_create();
-    apriltag_detector_add_family(mtd, mtf);
+    _td = apriltag_detector_create();
+    apriltag_detector_add_family(_td, _tf);
 }
 
 void AprilTagDetector::printFamily() 
 {
-    std::cout << "April Tag Family: " << mTagFamily << "\n";
+    std::cout << "April Tag Family: " << _TagFamily << "\n";
 }
 
 std::unordered_map<std::string, VariantType> AprilTagDetector::detectTag(const cv::Mat &image)
@@ -73,36 +73,29 @@ std::unordered_map<std::string, VariantType> AprilTagDetector::detectTag(const c
     cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
 
     // Show gray image
-    cv::imshow(mCamName, gray);  
+    cv::imshow(_CamName, gray);  
     cv::waitKey(1); 
 
     // Make an image_u8_t header for the Mat data
     image_u8_t im = {gray.cols, gray.rows, gray.cols, gray.data};
 
-    std::cout << "1\n";
     // Perform Detection of April Tags
-    zarray_t *detections = apriltag_detector_detect(mtd, &im); 
-    std::cout << "2\n";   
+    zarray_t *detections = apriltag_detector_detect(_td, &im); 
 
     std::unordered_map<std::string, VariantType>  Detection;
 
-    std::cout << "3\n"; 
 
     for (int i = 0; i < zarray_size(detections); i++) {
-        
-        std::cout << "4\n"; 
+ 
         // Get Detection information into a readable form
         apriltag_detection_t *det;
         zarray_get(detections, i, &det);
-        std::cout << "5\n"; 
 
         // Populate a Structure with Dectection Information
         TagDetection_struct Detection_object(det);
-
-        std::cout << "6\n"; 
-
+        
         // Print Detection Information to the Terminal
-        // Detection_object.display();
+        Detection_object.display();
 
         Detection = Detection_object.returnDetection();
 
@@ -113,7 +106,7 @@ std::unordered_map<std::string, VariantType> AprilTagDetector::detectTag(const c
     apriltag_detections_destroy(detections);
 
     // Show Tag Image with Detection Overlay
-    imshow(mCamName + " Tag Detections", frame);
+    imshow(_CamName + " Tag Detections", frame);
 
     std::cout << "End detect callback\n";
 

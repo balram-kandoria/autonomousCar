@@ -52,15 +52,15 @@ class TagPerception
 
     private:
         // Internal Class Variables
-        rclcpp::Node::SharedPtr mPerceptionNode;
-        AprilTagDetector& mDetector;
-        std::string mRawCamTopic;
-        std::string mCamName;
+        rclcpp::Node::SharedPtr _PerceptionNode;
+        AprilTagDetector& _Detector;
+        std::string _RawCamTopic;
+        std::string _CamName;
         
         
 
         //Subscribers
-        rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr mCamSubscription;
+        rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr _CamSubscription;
 
 
         // Callback
