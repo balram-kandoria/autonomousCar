@@ -44,25 +44,25 @@ TagPerception::TagPerception(
     std::string camTopic,
     std::string camName) 
     : 
-    mPerceptionNode(perceptionNode),
-    mDetector(detector), 
-    mRawCamTopic(std::move(camTopic)),
-    mCamName(std::move(camName))
+    _PerceptionNode(perceptionNode),
+    _Detector(detector), 
+    _RawCamTopic(std::move(camTopic)),
+    _CamName(std::move(camName))
     
 {
-    mCamSubscription = mPerceptionNode->create_subscription<sensor_msgs::msg::Image>(
-        mRawCamTopic, 10,
+    _CamSubscription = _PerceptionNode->create_subscription<sensor_msgs::msg::Image>(
+        _RawCamTopic, 10,
         std::bind(&TagPerception::imageCallback, this, std::placeholders::_1)
     );
 
-    std::cout << "Initializing Perception for [" << mCamName << "]\n";
+    std::cout << "Initializing Perception for [" << _CamName << "]\n";
 
    
 }
 
 void TagPerception::printTopic() 
 {
-    std::cout << "April Tag Topic: " << mRawCamTopic << "\n";
+    std::cout << "April Tag Topic: " << _RawCamTopic << "\n";
 }
 
 void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
@@ -70,16 +70,14 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 
     cv::Mat image = cv_bridge::toCvCopy(msg,"bgr8")->image;
 
-    std::cout << "One\n";
-    std::unordered_map<std::string, VariantType> detection = mDetector.detectTag(image);
+    std::unordered_map<std::string, VariantType> detection = _Detector.detectTag(image);
 
-    std::cout << "Two\n";
     // detection.display();
-    std::cout << "Three\n";
 
-    // cv::imshow(mCamName, image);  
+
+    // cv::imshow(_CamName, image);  
     // int k = cv::waitKey(1); // Wait for a keystroke in the window
-    // cv::destroyWindow(mCamName);
+    // cv::destroyWindow(_CamName);
 
     // Create Detector
     // apriltag_family_t *tf = NULL;
@@ -89,14 +87,4 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
     // apriltag_detector_add_family(mtd, tf);
 
     
-
-        
-        
-        
-        
-        
-
-
-             
-
 }
