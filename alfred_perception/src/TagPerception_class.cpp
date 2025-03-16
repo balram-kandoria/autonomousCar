@@ -36,7 +36,7 @@ extern "C" {
     #include "apriltag/common/getopt.h"
     }
 
-
+using VariantType = std::variant<int, float, std::vector<std::vector<float>>, std::vector<float>>;
 
 TagPerception::TagPerception(
     rclcpp::Node::SharedPtr perceptionNode,
@@ -70,7 +70,12 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 
     cv::Mat image = cv_bridge::toCvCopy(msg,"bgr8")->image;
 
-    mDetector.detectTag(image);
+    std::cout << "One\n";
+    std::unordered_map<std::string, VariantType> detection = mDetector.detectTag(image);
+
+    std::cout << "Two\n";
+    // detection.display();
+    std::cout << "Three\n";
 
     // cv::imshow(mCamName, image);  
     // int k = cv::waitKey(1); // Wait for a keystroke in the window
@@ -86,31 +91,7 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
     
 
         
-        // cv::line(frame, cv::Point(det->p[0][0], det->p[0][1]),
-        //     cv::Point(det->p[1][0], det->p[1][1]),
-        //     cv::Scalar(0, 0xff, 0), 2);
-        // cv::line(frame, cv::Point(det->p[0][0], det->p[0][1]),
-        //     cv::Point(det->p[3][0], det->p[3][1]),
-        //     cv::Scalar(0, 0, 0xff), 2);
-        // cv::line(frame, cv::Point(det->p[1][0], det->p[1][1]),
-        //     cv::Point(det->p[2][0], det->p[2][1]),
-        //     cv::Scalar(0xff, 0, 0), 2);
-        // cv::line(frame, cv::Point(det->p[2][0], det->p[2][1]),
-        //     cv::Point(det->p[3][0], det->p[3][1]),
-        //     cv::Scalar(0xff, 0, 0), 2);
-
-        // std::stringstream ss;
-        // ss << det->id;
-        // cv::String text = ss.str();
-        // int fontface = cv::FONT_HERSHEY_SCRIPT_SIMPLEX;
-        // double fontscale = 1.0;
-        // int baseline;
         
-        // cv::Size textsize = cv::getTextSize(text, fontface, fontscale, 2,
-        //                                 &baseline);
-        // cv::putText(frame, text, cv::Point(det->c[0]-textsize.width/2,
-        //                            det->c[1]+textsize.height/2),
-        //         fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
         
         
         

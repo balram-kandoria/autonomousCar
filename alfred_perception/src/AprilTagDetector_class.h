@@ -13,6 +13,9 @@
 #include "cv_bridge/cv_bridge.hpp"
 #include <opencv2/opencv.hpp>
 
+// Structures
+#include "TagDetection_struct.h"
+
 // C Libraries
 extern "C" {
     #include "apriltag/apriltag.h"
@@ -27,6 +30,8 @@ extern "C" {
     #include "apriltag/common/getopt.h"
     }
 
+using VariantType = std::variant<int, float, std::vector<std::vector<float>>, std::vector<float>>;
+
 class AprilTagDetector
 {
     public: 
@@ -38,7 +43,7 @@ class AprilTagDetector
 
         // Methods
         void printFamily();
-        void detectTag(const cv::Mat &image);
+        std::unordered_map<std::string, VariantType> detectTag(const cv::Mat &image);
 
     private:
         std::string mTagFamily;

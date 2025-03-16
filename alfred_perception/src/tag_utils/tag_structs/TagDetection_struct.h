@@ -4,11 +4,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <variant>
 
 // C Libraries
 extern "C" {
     #include "apriltag/apriltag.h"
 }
+
+using VariantType = std::variant<int, float, std::vector<std::vector<float>>, std::vector<float>>;
 
 struct TagDetection_struct {
     apriltag_detection_t *det; 
@@ -50,6 +54,10 @@ struct TagDetection_struct {
 
     // Member function to display information
     void display() const;
+    std::unordered_map<std::string, VariantType> returnDetection();
+
+    
 };
+
 
 #endif // TAGDETECTION_H
