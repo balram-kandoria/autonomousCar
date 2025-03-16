@@ -13,7 +13,8 @@ find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
-find_package(apriltag)
+find_package(apriltag REQUIRED)
+find_package(yaml-cpp REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -22,6 +23,7 @@ find_package(apriltag)
 include_directories(
   include
   src/tag_utils/tag_structs
+  src/cfg/
 )
 
 
@@ -34,8 +36,8 @@ add_executable(alfred_perception
   )
 
 # Link the executable to the required ROS2 libraries
-ament_target_dependencies(alfred_perception rclcpp std_msgs sensor_msgs cv_bridge OpenCV apriltag)
-target_link_libraries(alfred_perception apriltag)
+ament_target_dependencies(alfred_perception rclcpp std_msgs sensor_msgs cv_bridge OpenCV apriltag yaml-cpp)
+target_link_libraries(alfred_perception apriltag yaml-cpp)
 
 
 # Add Executables to directory
@@ -50,6 +52,10 @@ install(DIRECTORY include/
 
 install(DIRECTORY src/tag_utils/tag_structs/
   DESTINATION src/tag_utils/tag_structs/
+)
+
+install(DIRECTORY src/cfg/
+  DESTINATION src/cfg/
 )
 
 # Install header files
