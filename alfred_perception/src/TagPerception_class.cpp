@@ -57,7 +57,6 @@ TagPerception::TagPerception(
 
     std::cout << "Initializing Perception for [" << _CamName << "]\n";
 
-   
 }
 
 void TagPerception::printTopic() 
@@ -70,9 +69,16 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 
     cv::Mat image = cv_bridge::toCvCopy(msg,"bgr8")->image;
 
-    std::unordered_map<std::string, VariantType> detection = _Detector.detectTag(image);
+    std::vector<TagDetection_struct> detection_list = _Detector.detectTag(image);
 
     // detection.display();
+
+    std::string key = "id";
+
+    if (detection_list.size() > 0) {
+        std::cout << detection_list[0].x << "\n";
+    };
+
 
 
     // cv::imshow(_CamName, image);  

@@ -12,6 +12,9 @@
 #include "apriltag/apriltag.h"
 #include "cv_bridge/cv_bridge.hpp"
 #include <opencv2/opencv.hpp>
+#include <opencv2/calib3d.hpp>
+
+// My changes
 
 // Structures
 #include "TagDetection_struct.h"
@@ -39,16 +42,25 @@ class AprilTagDetector
         AprilTagDetector(
             std::string TagFamily, 
             double TagSize,
-            std::string camName);
+            std::string camName,
+            cv::Mat camDistortionCoeff,
+            cv::Mat camMatrix,
+            bool visualize,
+            bool debug);
 
         // Methods
         void printFamily();
-        std::unordered_map<std::string, VariantType> detectTag(const cv::Mat &image);
+        std::vector<TagDetection_struct> detectTag(const cv::Mat &image);
 
     private:
         std::string _TagFamily;
         double _TagSize;
         std::string _CamName;
+        cv::Mat _camDistortionCoeff;
+        cv::Mat _camMatrix;
+        cv::Mat _objPt;
+        bool _visualize;
+        bool _debug;
         apriltag_detector_t *_td;
         apriltag_family_t *_tf;
         
