@@ -18,7 +18,7 @@ double multiply(double x, double y) {
     return x * y;
 }
 
-cv::Mat add_Detection_to_Image() {
+cv::Mat add_Detection_to_Image(apriltag_detection_t *det, cv::Mat frame) {
 
     cv::line(frame, cv::Point(det->p[0][0], det->p[0][1]),
         cv::Point(det->p[1][0], det->p[1][1]),
@@ -45,4 +45,6 @@ cv::Mat add_Detection_to_Image() {
     cv::putText(frame, text, cv::Point(det->c[0]-textsize.width/2,
                                det->c[1]+textsize.height/2),
             fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
+
+    return frame;
 }

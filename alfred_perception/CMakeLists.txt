@@ -23,6 +23,7 @@ find_package(yaml-cpp REQUIRED)
 include_directories(
   include
   src/tag_utils/tag_structs
+  src/tag_utils/tag_functions
   src/cfg/
 )
 
@@ -33,6 +34,7 @@ add_executable(alfred_perception
   src/AprilTagDetector_class.cpp
   src/TagPerception_class.cpp
   src/tag_utils/tag_structs/TagDetection_struct.cpp
+  src/tag_utils/tag_functions/tag_helper.cpp
   )
 
 # Link the executable to the required ROS2 libraries
@@ -54,9 +56,19 @@ install(DIRECTORY src/tag_utils/tag_structs/
   DESTINATION src/tag_utils/tag_structs/
 )
 
+install(DIRECTORY src/tag_utils/tag_functions
+  DESTINATION src/tag_utils/tag_functions
+)
+
 install(DIRECTORY src/cfg/
   DESTINATION src/cfg/
 )
+
+install(DIRECTORY include/
+    DESTINATION include/
+    FILES_MATCHING PATTERN "*.h"
+)
+
 
 # Install header files
 # install(DIRECTORY include/

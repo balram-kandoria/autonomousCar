@@ -7,6 +7,11 @@
 #include <unordered_map>
 #include <variant>
 
+// Other Libraries
+#include "cv_bridge/cv_bridge.hpp"
+#include <opencv2/opencv.hpp>
+#include <opencv2/calib3d.hpp>
+
 // C Libraries
 extern "C" {
     #include "apriltag/apriltag.h"
@@ -16,20 +21,28 @@ using VariantType = std::variant<int, float, std::vector<std::vector<float>>, st
 
 struct TagDetection_struct {
     apriltag_detection_t *det; 
-    int id;
-    int hamming;  
-    float decision_margin; 
-    std::vector<std::vector<float>> cornerPoints = {
+    int id = -1;
+    int hamming = 0;  
+    float decision_margin = 0.0; 
+    std::vector<cv::Point2d> cornerPoints = {
         {0,0},
         {0,0},
         {0,0},
         {0,0}
     }; // pixel locations (x, y) 4 x 2 
 
-    std::vector<float> centerPoints;
+    std::vector<float> centerPoints = {0,0};
+
+    double x = 0.0; 
+    double y = 0.0;
+    double z = 0.0;
+    double roll = 0.0;
+    double pitch = 0.0;
+    double yaw = 0.0;
+
 
     // Constructor
-    TagDetection_struct(apriltag_detection_t *detection) 
+    TagDetection_struct(apriltag_detection_t *detection = {}) 
     :   det(detection) 
          {  
             
@@ -46,8 +59,8 @@ struct TagDetection_struct {
 
             // Populate Corner Points
             for (int i=0;i<4;i++){
-                cornerPoints[i][0] = (det->p[i][0]);
-                cornerPoints[i][1] = (det->p[i][1]);
+                cornerPoints[i] = {det->p[i][0], det->p[i][1]};
+                // cornerPoints[i][1] = ();
             }
 
         }
@@ -56,7 +69,6 @@ struct TagDetection_struct {
     void display() const;
     std::unordered_map<std::string, VariantType> returnDetection();
 
-    
 };
 
 
