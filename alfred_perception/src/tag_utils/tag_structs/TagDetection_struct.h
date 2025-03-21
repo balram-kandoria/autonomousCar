@@ -40,9 +40,11 @@ struct TagDetection_struct {
     double pitch = 0.0;
     double yaw = 0.0;
 
+    double _TagSize = 0.0;
+
 
     // Constructor
-    TagDetection_struct(apriltag_detection_t *detection = {}) 
+    TagDetection_struct(apriltag_detection_t *detection = {}, double TagSize = 0) 
     :   det(detection) 
          {  
             
@@ -63,11 +65,13 @@ struct TagDetection_struct {
                 // cornerPoints[i][1] = ();
             }
 
+            _TagSize = TagSize;
+
         }
 
     // Member function to display information
     void display() const;
-    std::unordered_map<std::string, VariantType> returnDetection();
+    cv::Mat drawDetection(cv::Mat img);
 
 };
 

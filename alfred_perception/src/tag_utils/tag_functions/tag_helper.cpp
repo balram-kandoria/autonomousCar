@@ -40,6 +40,8 @@ cv::Mat add_Detection_to_Image(apriltag_detection_t *det, cv::Mat frame) {
     double fontscale = 1.0;
     int baseline;
     
+    std::cout << det->id << "\n";
+    std::cout << text << "\n";
     cv::Size textsize = cv::getTextSize(text, fontface, fontscale, 2,
                                     &baseline);
     cv::putText(frame, text, cv::Point(det->c[0]-textsize.width/2,
