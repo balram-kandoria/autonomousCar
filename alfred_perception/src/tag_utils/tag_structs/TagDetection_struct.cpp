@@ -37,15 +37,31 @@ void TagDetection_struct::display() const {
 
 }
 
-// std::unordered_map<std::string, VariantType> TagDetection_struct::returnDetection() {
-    
-//     std::unordered_map<std::string, VariantType> Detection;
+cv::Mat TagDetection_struct::drawDetection(cv::Mat img) {
+    cv::Scalar green = cv::Scalar(0,255,0,0);
+    int thickness = 3;
 
-//     Detection["id"] = id;
-//     Detection["hamming"] = hamming;
-//     Detection["decision_margin"] = decision_margin;
-//     Detection["centerPoints"] = centerPoints;
-//     Detection["cornerPoints"] = cornerPoints;
+    for (size_t i = 0; i < cornerPoints.size(); i++) {
+        if (i != cornerPoints.size()-1) {
+            cv::line(img, cornerPoints[i], cornerPoints[i+1], green, thickness);
+        }
+        else {
+            cv::line(img, cornerPoints[i], cornerPoints[0], green, thickness);
+        }
+    };
 
-//     return Detection;
-// }
+    std::string ID = std::to_string(id);
+    double imgCenterX = abs((cornerPoints[0].x - cornerPoints[1].x) / 2.0) + abs(cornerPoints[0].x); 
+    double imgCenterY = abs((cornerPoints[1].y - cornerPoints[2].y) / 2.0) + abs(cornerPoints[2].y); 
+
+    std::cout << imgCenterX << " " << imgCenterY << "\n";
+
+    cv::Point origin = cv::Point2d(imgCenterX, imgCenterY);
+    int font = cv::FONT_HERSHEY_SIMPLEX;
+    double fontSize = 1.0;
+    cv::Scalar blue = cv::Scalar(255,0,0,0);
+
+    cv::putText(img, ID, origin, font, fontSize, blue, thickness);
+
+    return img;
+}

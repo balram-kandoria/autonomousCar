@@ -75,9 +75,9 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 
     std::string key = "id";
 
-    if (detection_list.size() > 0) {
-        std::cout << detection_list[0].x << "\n";
-    };
+    // if (detection_list.size() > 0) {
+    //     std::cout << detection_list[0].x << "\n";
+    // };
 
 
 
