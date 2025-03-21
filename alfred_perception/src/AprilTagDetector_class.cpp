@@ -77,7 +77,7 @@ void AprilTagDetector::printFamily()
 
 std::vector<TagDetection_struct> AprilTagDetector::detectTag(const cv::Mat &image)
 {
-    std::cout << "Running Tag Detector" << "\n";
+    // std::cout << "Running Tag Detector" << "\n";
 
     // Create Empty Mat items to store manipulated images
     cv::Mat frame, gray;    
@@ -109,50 +109,53 @@ std::vector<TagDetection_struct> AprilTagDetector::detectTag(const cv::Mat &imag
         
 
         // Populate a Structure with Dectection Information
-        TagDetection_struct Detection_object(det);
+        TagDetection_struct Detection_object(det, _TagSize);
 
         cv::Mat rvec, tvec;
+        
+        if (_debug) {
+            std::cout << "Object Points: " << _objPt <<"\n";
 
-        std::cout << _objPt <<"\n";
+            std::cout << "Camera Matrix: " << _camMatrix << "\n";
 
-        std::cout << Detection_object.cornerPoints << "\n";
-
-        std::cout << _camMatrix << "\n";
-
-        std::cout << _camDistortionCoeff << "\n";
+            std::cout << "Camera Distortion Coefficients: " << _camDistortionCoeff << "\n";
+        }
         
         bool success = cv::solvePnPRansac(_objPt, Detection_object.cornerPoints, _camMatrix, _camDistortionCoeff, rvec, tvec);
 
+        if (success) {
+            Detection_object.x = 4.0;
+            
+            if (_debug) {
+                // Print Detection Information to the Terminal
+                Detection_object.display();
+            };
+            
+            detection_list.emplace_back(Detection_object);
+
+            // Detection = Detection_object.returnDetection();
+
+            // std::cout << Detection_object.centerPoints[0] << "\n";
+
+            if (_visualize) {
+                // Show gray image
+                cv::imshow(_CamName, gray);
+                
+                cv::Mat frame_w_detection = Detection_object.drawDetection(frame);
         
-        Detection_object.x = 4.0;
+                // Show Tag Image with Detection Overlay
+                imshow(_CamName + " Tag Detections", frame_w_detection);
         
-        if (_debug) {
-            // Print Detection Information to the Terminal
-            Detection_object.display();
+                cv::waitKey(10); 
+            };
         };
-        
-        detection_list.emplace_back(Detection_object);
-
-        // Detection = Detection_object.returnDetection();
-
-        std::cout << Detection_object.centerPoints[0] << "\n";
 
     };
 
     // Empty Detections Variable
     apriltag_detections_destroy(detections);
 
-    if (_visualize) {
-        // Show gray image
-        cv::imshow(_CamName, gray);
-        
-        cv::Mat frame_w_detection = add_Detection_to_Image(det, frame);
 
-        // Show Tag Image with Detection Overlay
-        imshow(_CamName + " Tag Detections", frame_w_detection);
-
-        cv::waitKey(10); 
-    };
 
 
     return detection_list;
