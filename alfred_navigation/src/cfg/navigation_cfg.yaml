@@ -1,0 +1,35 @@
+static_transforms:
+  frame1:
+    frame_id: "world"
+    child_frame_id: "base_link"
+    translation:
+      - 0.0
+      - 0.0
+      - 0.2
+    rotation:
+      - 0.0
+      - 0.0
+      - 0.0
+  frame2:
+    frame_id: "base_link"
+    child_frame_id: "imu_link"
+    translation:
+      - 0.0
+      - 0.0
+      - 0.2
+    rotation:
+      - 0.0
+      - 0.0
+      - 0.0
+  frame3:
+    frame_id: "base_link"
+    child_frame_id: "camera_link"
+    translation:
+      - 0.0
+      - 0.0
+      - 0.4
+    rotation:
+      - 0.0
+      - 0.0
+      - 0.0
+test: "Config File is working"

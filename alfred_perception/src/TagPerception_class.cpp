@@ -36,8 +36,6 @@ extern "C" {
     #include "apriltag/common/getopt.h"
     }
 
-using VariantType = std::variant<int, float, std::vector<std::vector<float>>, std::vector<float>>;
-
 TagPerception::TagPerception(
     rclcpp::Node::SharedPtr perceptionNode,
     AprilTagDetector& detector, 
@@ -75,22 +73,8 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 
     std::string key = "id";
 
-    // if (detection_list.size() > 0) {
-    //     std::cout << detection_list[0].x << "\n";
-    // };
-
-
-
-    // cv::imshow(_CamName, image);  
-    // int k = cv::waitKey(1); // Wait for a keystroke in the window
-    // cv::destroyWindow(_CamName);
-
-    // Create Detector
-    // apriltag_family_t *tf = NULL;
-    // tf = tag36h11_create();
-
-    // apriltag_detector_t *mtd = apriltag_detector_create();
-    // apriltag_detector_add_family(mtd, tf);
-
+    if (detection_list.size() > 0) {
+        std::cout << detection_list[0].x << "\n";
+    };
     
 }

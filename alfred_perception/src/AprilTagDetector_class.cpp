@@ -124,7 +124,13 @@ std::vector<TagDetection_struct> AprilTagDetector::detectTag(const cv::Mat &imag
         bool success = cv::solvePnPRansac(_objPt, Detection_object.cornerPoints, _camMatrix, _camDistortionCoeff, rvec, tvec);
 
         if (success) {
-            Detection_object.x = 4.0;
+
+            std::cout << "rvec: " << rvec << "\n";
+            std::cout << "tvec: " << tvec << "\n";
+
+            Detection_object.z = tvec.at<double>(2,0);
+            Detection_object.x = tvec.at<double>(0,0);
+            Detection_object.y = tvec.at<double>(1,0);
             
             if (_debug) {
                 // Print Detection Information to the Terminal
@@ -132,10 +138,6 @@ std::vector<TagDetection_struct> AprilTagDetector::detectTag(const cv::Mat &imag
             };
             
             detection_list.emplace_back(Detection_object);
-
-            // Detection = Detection_object.returnDetection();
-
-            // std::cout << Detection_object.centerPoints[0] << "\n";
 
             if (_visualize) {
                 // Show gray image
