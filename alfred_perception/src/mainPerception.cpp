@@ -93,7 +93,7 @@ int main(int argc, char * argv[])
     cameraMatrix_list = {frontCamMatrix, backCamMatrix};
     distortionCoeffs_list = {frontCamDistortionCoeff, backCamDistortionCoeff};
     debug_list = {true, false};
-    visualize_list = {true, false};
+    visualize_list = {false, false};
 
     std::vector<std::unique_ptr<AprilTagDetector>> detectorObjects;
     std::vector<std::unique_ptr<TagPerception>> tagPerceptionObjects;

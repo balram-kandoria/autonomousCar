@@ -1,7 +1,17 @@
 launch:
 
-# - include:
-#     file: "$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py world_sdf_file:=/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/worlds/world.sdf"
+- include:
+    file: "$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py"
+    arg:
+    -   
+        name: "on_exit_shutdown"
+        value: "True"
+    -
+        name: "gz_args"
+        value: "/home/phd/dev/ros2_ws/autonomousCar/alfred_sim/worlds/world.sdf"
+
+- include:
+    file: "$(find-pkg-share alfred_sim)/launch/gazebo_sim_launch.xml"
 
 - node:
     pkg: "ros_gz_bridge"
@@ -13,8 +23,20 @@ launch:
         name: "config_file"
         value: "/home/phd/dev/ros2_ws/autonomousCar/alfred_bringup/config/ros_gz_bridge.yaml"
 
-# Launch World Simulation
-- executable: 
-    cmd: gz sim -v 1 -r /home/phd/dev/ros2_ws/autonomousCar/alfred_sim/worlds/world.sdf
+- node:
+    pkg: "alfred_perception"
+    exec: alfred_perception
+    name: "sim"
+    namespace: "alfred_perception"
 
-
+# Define Transforms
+# - node:
+#     # tf2_ros static_transform_publisher x y z yaw pitch roll parent_frame_id child_frame_id
+#     pkg: "tf2_ros"
+#     exec: static_transform_publisher
+#     name: "sim"
+#     namespace: "tf2_ros"
+#     param:
+#     -
+#         name: "args"
+    

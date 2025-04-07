@@ -7,9 +7,57 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(yaml-cpp REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2 REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+
+# Specify include directories
+include_directories(
+  include
+  src/cfg
+  src/nav_utils/nav_structs
+)
+
+# Declare your executable target
+add_executable(alfred_navigation 
+  src/mainNavigation.cpp
+  src/worldTransforms_class.cpp
+  src/staticTransform_class.cpp
+  src/nav_utils/nav_structs/StaticTransform_struct.cpp
+  )
+
+# Link the executable to the required ROS2 libraries
+ament_target_dependencies(alfred_navigation rclcpp std_msgs sensor_msgs geometry_msgs tf2_ros tf2 yaml-cpp)
+target_link_libraries(alfred_navigation yaml-cpp)
+
+# Add Executables to directory
+install(TARGETS
+  alfred_navigation
+  DESTINATION lib/${PROJECT_NAME})
+
+# Install header files
+install(DIRECTORY include/
+  DESTINATION include/
+)
+
+# Install header files
+install(DIRECTORY include/
+  DESTINATION include/
+)
+
+install(DIRECTORY include/
+    DESTINATION include/
+    FILES_MATCHING PATTERN "*.h"
+)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
