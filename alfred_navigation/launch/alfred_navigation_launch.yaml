@@ -1,0 +1,11 @@
+launch:
+
+- node:
+    pkg: "tf2_ros"
+    exec: static_transform_publisher
+    name: "sim"
+    namespace: "static_transforms"
+    param:
+    - 
+        name: "config_file"
+        value: "/home/phd/dev/ros2_ws/autonomousCar/alfred_bringup/config/ros_gz_bridge.yaml"

@@ -17,8 +17,6 @@ extern "C" {
     #include "apriltag/apriltag.h"
 }
 
-using VariantType = std::variant<int, float, std::vector<std::vector<float>>, std::vector<float>>;
-
 struct TagDetection_struct {
     apriltag_detection_t *det; 
     int id = -1;

@@ -33,8 +33,6 @@ extern "C" {
     #include "apriltag/common/getopt.h"
     }
 
-using VariantType = std::variant<int, float, std::vector<std::vector<float>>, std::vector<float>>;
-
 class AprilTagDetector
 {
     public: 

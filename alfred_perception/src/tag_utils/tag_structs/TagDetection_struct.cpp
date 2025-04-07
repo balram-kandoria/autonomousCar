@@ -60,6 +60,7 @@ cv::Mat TagDetection_struct::drawDetection(cv::Mat img) {
     int font = cv::FONT_HERSHEY_SIMPLEX;
     double fontSize = 1.0;
     cv::Scalar blue = cv::Scalar(255,0,0,0);
+    
 
     cv::putText(img, ID, origin, font, fontSize, blue, thickness);
 

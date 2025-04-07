@@ -2,7 +2,7 @@
 <sdf version="1.7">
     <model name="tugbot">
         <self_collide>false</self_collide>
-        <pose>0 0 0.2 0 0 0</pose>
+        <posel>0 0 0.2 0 0 0</pose>
         <static>false</static>
         <!-- BASE -->
         <link name="base_link">
@@ -23,7 +23,7 @@
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>meshes/base/tugbot_simp.stl</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/base/tugbot_simp.stl</uri>
                     </mesh>
                 </geometry>
             </collision>
@@ -31,7 +31,7 @@
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>meshes/base/tugbot_simp.dae</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/base/tugbot_simp.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -39,7 +39,7 @@
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>meshes/base/movai_logo.dae</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/base/movai_logo.dae</uri>
                     </mesh>
                 </geometry>
                 <material>
@@ -56,7 +56,7 @@
                 <geometry>
                     <mesh>
                         <scale>1.0 1.0 1.0</scale>
-                        <uri>meshes/light_link/light_led.stl</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/light_link/light_led.stl</uri>
                     </mesh>
                 </geometry>
                 <material>
@@ -71,7 +71,7 @@
                 <geometry>
                     <mesh>
                         <scale>1.02 1.02 1.02</scale>
-                        <uri>meshes/light_link/light.stl</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/light_link/light.stl</uri>
                     </mesh>
                 </geometry>
                 <material>
@@ -348,7 +348,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>meshes/VLP16_base_1.dae</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/VLP16_base_1.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -358,7 +358,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>meshes/VLP16_base_2.dae</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/VLP16_base_2.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -368,7 +368,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>meshes/VLP16_scan.dae</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/VLP16_scan.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -447,7 +447,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>meshes/gripper2/gripper2.dae</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/gripper2/gripper2.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -532,7 +532,7 @@
                 <geometry>
                     <mesh>
                         <scale>0.001 0.001 0.001</scale>
-                        <uri>meshes/gripper2/gripper_hand.stl</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/gripper2/gripper_hand.stl</uri>
                     </mesh>
                 </geometry>
                 <material>
@@ -808,7 +808,7 @@
                 <geometry>
                     <mesh>
                         <scale>0.98 0.98 1.0</scale>
-                        <uri>meshes/wheel/wheel.dae</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/wheel/wheel.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -873,7 +873,7 @@
                 <geometry>
                     <mesh>
                         <scale>0.98 0.98 1.0</scale>
-                        <uri>meshes/wheel/wheel.dae</uri>
+                        <uri>package://view_sdf_rviz/models/tugbot/1/meshes/wheel/wheel.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -946,6 +946,7 @@
             <recharge_by_topic>true</recharge_by_topic>
         </plugin>
         <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+            <update_rate>20</update_rate>
             <joint_name>gripper_joint</joint_name>
             <joint_name>gripper_hand_joint</joint_name>
             <joint_name>imu_link_joint</joint_name>

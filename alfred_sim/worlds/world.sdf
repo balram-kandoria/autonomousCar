@@ -1581,8 +1581,20 @@
         <recharge_by_topic>true</recharge_by_topic>
       </plugin>
       <plugin name='ignition::gazebo::systems::JointStatePublisher' filename='ignition-gazebo-joint-state-publisher-system'>
+        <update_rate>20</update_rate>
         <joint_name>gripper_joint</joint_name>
         <joint_name>gripper_hand_joint</joint_name>
+        <joint_name>imu_link_joint</joint_name>
+        <joint_name>warnign_light_joint</joint_name>
+        <joint_name>camera_front_joint</joint_name>
+        <joint_name>camera_back_joint</joint_name>
+        <joint_name>scan_front_joint</joint_name>
+        <joint_name>scan_back_joint</joint_name>
+        <joint_name>scan_omni_joint</joint_name>
+        <joint_name>wheel_front_joint</joint_name>
+        <joint_name>wheel_back_joint</joint_name>
+        <joint_name>wheel_left_joint</joint_name>
+        <joint_name>wheel_right_joint</joint_name>
       </plugin>
 
       
