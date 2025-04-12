@@ -14,22 +14,78 @@ static_transforms:
     frame_id: "base_link"
     child_frame_id: "imu_link"
     translation:
-      - 0.0
-      - 0.0
-      - 0.2
+      - 0.14
+      - 0.02
+      - 0.25
     rotation:
       - 0.0
       - 0.0
-      - 0.0
+      - -1.57
   frame3:
     frame_id: "base_link"
-    child_frame_id: "camera_link"
+    child_frame_id: "warnign_light"
     translation:
+      - -0.185
       - 0.0
-      - 0.0
-      - 0.4
+      - 0.46
     rotation:
       - 0.0
       - 0.0
       - 0.0
+  frame4:
+    frame_id: "base_link"
+    child_frame_id: "camera_front"
+    translation:
+      - 0.0553
+      - 0.0
+      - 0.4323
+    rotation:
+      - 0.0
+      - 0.0
+      - 0.0
+  frame5:
+    frame_id: "base_link"
+    child_frame_id: "camera_back"
+    translation:
+      - -0.241
+      - 0.0
+      - 0.2303
+    rotation:
+      - 0.0
+      - 0.0
+      - 3.141592654
+  frame6:
+    frame_id: "base_link"
+    child_frame_id: "tugbot/scan_front/scan_front"
+    translation:
+      - 0.221
+      - 0.0
+      - 0.1404
+    rotation:
+      - 0.0
+      - 0.0
+      - 0.0
+  frame7:
+    frame_id: "base_link"
+    child_frame_id: "tugbot/scan_back/scan_back"
+    translation:
+      - -0.2075
+      - 0.0
+      - 0.205
+    rotation:
+      - 0.0
+      - 0.0
+      - 3.141592654
+  frame8:
+    frame_id: "base_link"
+    child_frame_id: "tugbot/scan_omni/scan_omni"
+    translation:
+      - -0.1855
+      - 0.0
+      - 0.5318
+    rotation:
+      - 0.0
+      - 0.0
+      - 0.0
+
 test: "Config File is working"
