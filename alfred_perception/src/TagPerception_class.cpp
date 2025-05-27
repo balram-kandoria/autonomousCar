@@ -1,6 +1,7 @@
 // Project Alfred Libraries
 #include "AprilTagDetector_class.h"
 #include "TagPerception_class.h"
+#include "alfred_interfaces/msg/april_tag_detection.hpp"
 
 // Built-in Cpp Libraries
 #include <iostream>
@@ -11,6 +12,7 @@
 // ROS2 Libraries
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.h"
+
 
 // Other Libraries
 #include "apriltag/apriltag.h"
@@ -53,6 +55,12 @@ TagPerception::TagPerception(
         std::bind(&TagPerception::imageCallback, this, std::placeholders::_1)
     );
 
+    std::string publishingTopic = "/vehicle/sensor/" + _CamName + "/tagdetection";
+
+    _CamPublisher = _PerceptionNode->create_publisher<alfred_interfaces::msg::AprilTagDetection>(
+        publishingTopic, 10
+    );
+
     std::cout << "Initializing Perception for [" << _CamName << "]\n";
 
 }
@@ -74,7 +82,38 @@ void TagPerception::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
     std::string key = "id";
 
     if (detection_list.size() > 0) {
-        std::cout << detection_list[0].x << "\n";
+        for (size_t i=0; i<detection_list.size();i++){
+            std::cout << detection_list[i].id << "\n";
+
+            if (detection_list[i].id == 201){
+                publishData(detection_list[i]);
+                std::cout << "publishing message\n";
+            };
+        };
     };
     
+}
+
+void TagPerception::publishData(TagDetection_struct data)
+{
+    alfred_interfaces::msg::AprilTagDetection msg;
+    rclcpp::Time now = _PerceptionNode->get_clock()->now();
+
+    msg.header.stamp = now;
+    msg.header.frame_id = _CamName;
+
+    msg.id = data.id;
+
+    msg.x = data.x;
+    msg.y = data.y;
+    msg.z = data.z;
+
+    msg.roll = data.roll;
+    msg.pitch = data.pitch;
+    msg.yaw = data.yaw;
+
+    _CamPublisher->publish(msg);
+
+
+    // _broadcaster.sendTransform(msg);
 }

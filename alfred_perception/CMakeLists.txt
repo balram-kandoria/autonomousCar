@@ -8,6 +8,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
@@ -15,6 +16,7 @@ find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(apriltag REQUIRED)
 find_package(yaml-cpp REQUIRED)
+find_package(alfred_interfaces REQUIRED)  
 
 
 # uncomment the following section in order to fill in
@@ -27,6 +29,8 @@ include_directories(
   src/tag_utils/tag_structs
   src/tag_utils/tag_functions
   src/cfg/
+  src/msg/
+  ${ament_index_cpp_INCLUDE_DIRS}
 )
 
 
@@ -40,9 +44,8 @@ add_executable(alfred_perception
   )
 
 # Link the executable to the required ROS2 libraries
-ament_target_dependencies(alfred_perception rclcpp std_msgs sensor_msgs cv_bridge OpenCV apriltag yaml-cpp)
+ament_target_dependencies(alfred_perception rclcpp std_msgs sensor_msgs cv_bridge OpenCV apriltag yaml-cpp alfred_interfaces)
 target_link_libraries(alfred_perception apriltag yaml-cpp)
-
 
 # Add Executables to directory
 install(TARGETS
@@ -70,7 +73,6 @@ install(DIRECTORY include/
     DESTINATION include/
     FILES_MATCHING PATTERN "*.h"
 )
-
 
 # Install header files
 # install(DIRECTORY include/

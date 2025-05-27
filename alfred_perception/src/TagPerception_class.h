@@ -3,6 +3,7 @@
 // Project Alfred Libraries
 #include "AprilTagDetector_class.h"
 #include "TagPerception_class.h"
+#include "alfred_interfaces/msg/april_tag_detection.hpp"
 
 // Built-in Cpp Libraries
 #include <iostream>
@@ -12,6 +13,7 @@
 // ROS2 Libraries
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.hpp"
+
 
 // Other Libraries
 #include "apriltag/apriltag.h"
@@ -49,6 +51,7 @@ class TagPerception
 
         // Methods
         void printTopic();
+        void publishData(TagDetection_struct data);
 
     private:
         // Internal Class Variables
@@ -61,6 +64,9 @@ class TagPerception
 
         //Subscribers
         rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr _CamSubscription;
+
+        //Publishers
+        rclcpp::Publisher<alfred_interfaces::msg::AprilTagDetection>::SharedPtr _CamPublisher;
 
 
         // Callback

@@ -81,6 +81,42 @@
                     <emissive>1 0.5 0 0.5</emissive>
                 </material>
             </visual>
+            <sensor name="navsat_sensor" type="navsat">
+                <always_on>true</always_on>
+                <update_rate>5.0</update_rate>
+                <topic>navsat</topic>
+                <navsat>
+                    <position_sensing>
+                    <horizontal>
+                        <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>1.0</stddev>
+                        </noise>
+                    </horizontal>
+                    <vertical>
+                        <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>2.0</stddev>
+                        </noise>
+                    </vertical>
+                    </position_sensing>
+                    <velocity_sensing>
+                    <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>0.2</stddev>
+                    </noise>
+                    </velocity_sensing>
+                </navsat>
+
+                <!-- ROS 2 plugin for NavSat -->
+                <!-- <plugin name="ros_gz_navsat_plugin" filename="gz_ros_navsat_sensor_system.so">
+                    <ros>
+                    <namespace>/my_robot</namespace>
+                    <remapping>~/navsat@gps/data</remapping>
+                    </ros>
+                    <frame_id>gps_link</frame_id>
+                </plugin> -->
+            </sensor>
         </link>
         <link name="imu_link">
             <pose>0.14 0.02 0.25 0 0 -1.57</pose>
