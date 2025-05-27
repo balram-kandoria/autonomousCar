@@ -14,6 +14,10 @@ find_package(sensor_msgs REQUIRED)
 find_package(yaml-cpp REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2 REQUIRED)
+find_package(alfred_interfaces REQUIRED) 
+find_package(tf2_geometry_msgs REQUIRED) 
+find_package(nav_msgs REQUIRED) 
+find_package(message_filters REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -31,11 +35,13 @@ add_executable(alfred_navigation
   src/mainNavigation.cpp
   src/worldTransforms_class.cpp
   src/staticTransform_class.cpp
+  src/dynamicTransforms_class.cpp
+  src/worldMap_class.cpp
   src/nav_utils/nav_structs/StaticTransform_struct.cpp
   )
 
 # Link the executable to the required ROS2 libraries
-ament_target_dependencies(alfred_navigation rclcpp std_msgs sensor_msgs geometry_msgs tf2_ros tf2 yaml-cpp)
+ament_target_dependencies(alfred_navigation rclcpp std_msgs sensor_msgs geometry_msgs tf2_ros tf2 yaml-cpp alfred_interfaces tf2_geometry_msgs nav_msgs message_filters) 
 target_link_libraries(alfred_navigation yaml-cpp)
 
 # Add Executables to directory
