@@ -131,6 +131,10 @@ std::vector<TagDetection_struct> AprilTagDetector::detectTag(const cv::Mat &imag
             Detection_object.z = tvec.at<double>(2,0);
             Detection_object.x = tvec.at<double>(0,0);
             Detection_object.y = tvec.at<double>(1,0);
+
+            Detection_object.roll = rvec.at<double>(0,0);
+            Detection_object.pitch = rvec.at<double>(1,0);
+            Detection_object.yaw = rvec.at<double>(2,0);
             
             if (_debug) {
                 // Print Detection Information to the Terminal
